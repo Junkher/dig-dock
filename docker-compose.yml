@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  prospector:
+    image: pcxmrig
+    container_name: prospector
+    volumes:
+      - ./config_prospector.json:/root/xmrig/config.json:ro
+      - ./proxychains.conf:/etc/proxychains/proxychains.conf
+    command: ["./xmrig"]
+    cpus: 0.83
+    restart: unless-stopped
+  digger:
+    image: pcxmrig
+    container_name: digger
+    volumes:
+      - ./config_digger.json:/root/xmrig/config.json:ro
+      - ./proxychains.conf:/etc/proxychains/proxychains.conf
+      - ./log:/xmrig/log
+    command: ["./xmrig"]
+    cpus: 0.83
+    restart: unless-stopped
